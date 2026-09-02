@@ -1,1 +1,132 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#0b8f47"><link rel="manifest" href="./manifest.webmanifest"><link rel="stylesheet" href="./styles.css"><title>Office Balance</title></head><body><div id="toast"></div><section id="auth" class="auth"><form id="loginForm" class="auth-card"><div class="logo">↔</div><h1>Office Balance</h1><p>Office ↔ Denis</p><label>Email<input id="email" type="email" value="Denis@hsg.com" required></label><label>Password<input id="password" type="password" required></label><button class="primary" type="submit">Sign in</button></form></section><div id="app" class="hidden shell"><header><div><small>OFFICE ↔ <span id="partnerName">PARTNER</span></small><h1 id="pageTitle">Home</h1></div><button id="logout" class="icon">↪</button></header><main id="home" class="page"><section id="hero" class="hero"><small>CURRENT BALANCE · DONE ONLY</small><strong id="balance">TZS 0</strong><span id="balanceMeaning">Balanced</span></section><div class="twocol"><section class="stat send"><small>SEND</small><span>He owes Office</span><b id="doneSend">TZS 0</b></section><section class="stat withdraw"><small>WITHDRAW</small><span>Office owes him</span><b id="doneWithdraw">TZS 0</b></section></div><button class="primary full add">+ Add Transaction</button><div class="section-title"><h2>Recent Done</h2><button data-go="transactions">See all</button></div><div id="recentList" class="list"></div></main><main id="pending" class="page hidden"><div class="notice">Pending transactions are saved but do not affect the current balance.</div><div class="threecol"><section class="stat send"><small>Pending Send</small><b id="pendingSend">TZS 0</b></section><section class="stat withdraw"><small>Pending Withdraw</small><b id="pendingWithdraw">TZS 0</b></section><section class="stat"><small>Net Effect</small><b id="pendingNet">TZS 0</b></section></div><section class="projection"><small>IF ALL PENDING ARE DONE</small><b id="projected">TZS 0</b><span id="projectedMeaning">Balanced</span></section><div class="section-title"><h2 id="pendingTitle">Pending</h2><button class="primary small add-pending">+ Add</button></div><div id="pendingList" class="list"></div></main><main id="transactions" class="page hidden"><div class="filters"><button class="filter active" data-filter="all">All</button><button class="filter" data-filter="done">Done</button><button class="filter" data-filter="pending">Pending</button></div><div class="section-title"><h2>Transactions</h2><button class="primary small add">+ Add</button></div><div id="transactionList" class="list"></div></main><nav><button class="nav active" data-go="home">⌂<small>Home</small></button><button class="nav" data-go="pending">◷<small>Pending</small></button><button class="nav" data-go="transactions">☷<small>Transactions</small></button></nav></div><div id="modal" class="modal hidden"><div class="sheet"><div class="sheet-head"><h2 id="formTitle">Add Transaction</h2><button id="closeModal">✕</button></div><form id="txnForm"><input id="txnId" type="hidden"><label>Name<input id="name" required></label><label>Amount<div class="money"><span>TZS</span><input id="amount" inputmode="decimal" required></div></label><label>Channel<select id="channel" required></select></label><fieldset><legend>Direction</legend><div class="choices"><label class="choice send-choice"><input type="radio" name="direction" value="send"><span><b>↑ SEND</b><small>He owes Office</small></span></label><label class="choice withdraw-choice"><input type="radio" name="direction" value="withdraw"><span><b>↓ WITHDRAW</b><small>Office owes him</small></span></label></div></fieldset><label>Status<select id="status"><option value="pending">Pending</option><option value="done">Done</option></select></label><label>Note<textarea id="note" rows="3"></textarea></label><div id="preview" class="preview">Pending: not included in current balance.</div><button class="primary full" type="submit">Save Transaction</button></form></div></div><script type="module" src="./app.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#0b8f47">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="stylesheet" href="./styles.css">
+  <title>Denis · HSG Customer App</title>
+</head>
+<body>
+  <div id="toast"></div>
+
+  <section id="splash" class="splash">
+    <div class="brand-mark" aria-label="HSG Holy Spirit Grace Glory">
+      <div class="blood-ring"><div class="hsg">HSG</div></div>
+      <div class="holy-spirit">HOLY SPIRIT</div>
+      <div class="grace-glory"><span>GRACE</span><i>•</i><b>GLORY</b></div>
+    </div>
+    <div class="splash-product"><h1>Denis</h1><p>Customer App</p></div>
+    <small>HSG</small>
+  </section>
+
+  <section id="auth" class="auth hidden">
+    <form id="loginForm" class="auth-card">
+      <div class="mini-brand"><div class="mini-ring">HSG</div><div><b>HOLY SPIRIT</b><small>GRACE • GLORY</small></div></div>
+      <h1>Denis</h1><p>Customer App</p>
+      <label>Email<input id="email" type="email" value="Denis@hsg.com" required></label>
+      <label>Password<input id="password" type="password" required></label>
+      <button class="primary full" type="submit">Sign in</button>
+    </form>
+  </section>
+
+  <div id="app" class="hidden shell">
+    <header class="app-header">
+      <div class="profile"><div class="avatar">D</div><div><strong id="partnerName">Denis</strong><small>Customer</small></div></div>
+      <button id="logout" class="icon-btn" aria-label="Open menu">⚙</button>
+    </header>
+
+    <main id="home" class="page">
+      <section class="welcome"><b id="greeting">Good morning, Denis 👋</b><small>Here is your current position</small></section>
+      <section id="hero" class="balance-card">
+        <small>CURRENT BALANCE</small><strong id="balance">TZS 0</strong><span id="balanceMeaning">Balanced</span><i>Done transactions only</i>
+      </section>
+      <div class="twocol">
+        <section class="stat send"><small>SEND</small><span>He owes Office</span><b id="doneSend">TZS 0</b></section>
+        <section class="stat withdraw"><small>WITHDRAW</small><span>Office owes him</span><b id="doneWithdraw">TZS 0</b></section>
+      </div>
+      <button class="summary-row" data-go="pending"><div><b>Pending Summary</b><small id="pendingCountHome">0 pending transactions</small></div><strong id="pendingHome">TZS 0</strong><span>›</span></button>
+      <div class="section-title"><h2>Recent Activity</h2><button data-go="transactions">See all</button></div>
+      <div id="recentList" class="list compact"></div>
+    </main>
+
+    <main id="transactions" class="page hidden">
+      <div class="page-head"><h1>Transactions</h1><button id="openFilter" class="icon-btn">☷</button></div>
+      <div class="segmented"><button class="quick active" data-quick="all">All</button><button class="quick" data-quick="done">Done</button><button class="quick" data-quick="pending">Pending</button></div>
+      <div class="searchbox">⌕<input id="txnSearch" placeholder="Search by name, channel or amount"></div>
+      <div class="list-meta"><small id="resultCount">0 transactions</small><button id="clearFilters" class="link hidden">Clear filters</button></div>
+      <div id="transactionList" class="list"></div>
+    </main>
+
+    <main id="pending" class="page hidden">
+      <div class="page-head"><h1>Pending</h1></div>
+      <div class="notice">Pending transactions are saved but do not affect the current balance.</div>
+      <section id="pendingSummary" class="pending-total"><small>PENDING NET EFFECT</small><strong id="pendingNet">TZS 0</strong><span id="pendingMeaning">No pending effect</span></section>
+      <div class="section-title"><h2 id="pendingTitle">Pending (0)</h2></div>
+      <div id="pendingList" class="list"></div>
+    </main>
+
+    <main id="add" class="page hidden form-page">
+      <div class="page-head"><button class="back" data-back>‹</button><h1 id="formTitle">Add Transaction</h1></div>
+      <form id="txnForm">
+        <input id="txnId" type="hidden">
+        <fieldset><legend>Direction</legend><div class="choices">
+          <label class="choice send-choice"><input type="radio" name="direction" value="send"><span><b>↗ Send</b><small>He owes Office</small></span></label>
+          <label class="choice withdraw-choice"><input type="radio" name="direction" value="withdraw"><span><b>↙ Withdraw</b><small>Office owes him</small></span></label>
+        </div></fieldset>
+        <label>Customer / Person *</label>
+        <button id="customerButton" class="picker-btn" type="button"><span id="customerButtonText">Select or search customer</span><b>›</b></button>
+        <input id="name" type="hidden" required>
+        <label>Channel *</label>
+        <select id="channel" required></select>
+        <label>Amount (TZS) *</label>
+        <div class="money"><input id="amount" inputmode="decimal" placeholder="Enter amount" required><span>TZS</span></div>
+        <label>Status *</label>
+        <div class="segmented status-segment"><button type="button" data-status-choice="done">Done</button><button type="button" data-status-choice="pending">Pending</button></div>
+        <input id="status" type="hidden" value="pending">
+        <label>Notes <small>(optional)</small></label><textarea id="note" rows="4" placeholder="Add a note..."></textarea>
+        <div id="preview" class="preview">Pending: not included in current balance.</div>
+        <button class="primary full save-btn" type="submit">Save Transaction</button>
+      </form>
+    </main>
+
+    <main id="detail" class="page hidden">
+      <div class="page-head"><button class="back" data-back>‹</button><h1>Transaction Detail</h1></div>
+      <section id="detailHero" class="detail-hero"></section>
+      <section id="detailFacts" class="facts"></section>
+      <section id="detailNote" class="note-card hidden"></section>
+      <div class="detail-actions"><button id="editTxn">✎ Edit</button><button id="toggleStatus">✓ Mark Done</button><button id="deleteTxn" class="danger">⌫ Delete</button></div>
+    </main>
+
+    <main id="filterPage" class="page hidden form-page">
+      <div class="page-head"><button class="back" data-back>‹</button><h1>Filter & Sort</h1></div>
+      <section class="filter-block"><label>Status</label><div class="segmented" id="statusFilters"><button data-filter-status="all" class="active">All</button><button data-filter-status="done">Done</button><button data-filter-status="pending">Pending</button></div></section>
+      <section class="filter-block"><label>Direction</label><div class="segmented" id="directionFilters"><button data-filter-direction="all" class="active">All</button><button data-filter-direction="send">Send</button><button data-filter-direction="withdraw">Withdraw</button></div></section>
+      <section class="filter-block"><label>Channel</label><select id="channelFilter"><option value="all">All Channels</option></select></section>
+      <section class="filter-block"><label>Sort by</label><select id="sortFilter"><option value="newest">Newest first</option><option value="oldest">Oldest first</option><option value="highest">Highest amount</option><option value="lowest">Lowest amount</option></select></section>
+      <button id="applyFilter" class="primary full save-btn">Apply Filter</button>
+    </main>
+
+    <main id="customers" class="page hidden form-page">
+      <div class="page-head"><button class="back" data-back>‹</button><h1>Select Customer</h1></div>
+      <div class="searchbox">⌕<input id="customerSearch" placeholder="Search name or channel"></div>
+      <button id="newCustomer" class="add-customer" type="button">＋ Add New Customer</button>
+      <div id="customerList" class="customer-list"></div>
+      <div id="newCustomerBox" class="new-customer-box hidden"><label>Customer name<input id="newCustomerName" placeholder="Enter name"></label><button id="useNewCustomer" type="button" class="primary full">Use this customer</button></div>
+    </main>
+
+    <nav class="bottom-nav">
+      <button class="nav active" data-go="home">⌂<small>Home</small></button>
+      <button class="nav" data-go="pending">◷<small>Pending</small></button>
+      <button class="nav" data-go="transactions">☷<small>Transactions</small></button>
+      <button class="nav" id="moreBtn">•••<small>More</small></button>
+    </nav>
+    <button id="fab" class="fab" aria-label="Add transaction">＋</button>
+  </div>
+
+  <div id="moreSheet" class="overlay hidden"><div class="sheet"><div class="sheet-head"><h2>Denis</h2><button id="closeMore">✕</button></div><button data-more-go="home">⌂ Home <small>Overview & balance</small></button><button data-more-go="pending">◷ Pending <small>Transactions waiting</small></button><button data-more-go="transactions">☷ Transactions <small>Full history</small></button><button id="moreAdd">＋ Add Transaction <small>New transaction</small></button><button id="moreLogout">⚙ Sign out <small>Leave Denis app</small></button></div></div>
+
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
